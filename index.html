@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NaviGame 导航游戏中心</title>
+    <style>
+        /* 基础样式与变量 */
+        :root {
+            --primary-color: #4A90E2;
+            --accent-color: #FF6B6B;
+            --bg-light: #F5F5F5;
+            --text-dark: #2C3E50;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui;
+        }
+
+        body {
+            background: var(--bg-light);
+            color: var(--text-dark);
+        }
+
+        /* 顶部导航栏 */
+        .navbar {
+            display: flex;
+            align-items: center;
+            padding: 1rem 5%;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-right: 3rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-item {
+            cursor: pointer;
+            padding: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .nav-item:hover {
+            color: var(--primary-color);
+        }
+
+        .search-box {
+            margin-left: auto;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+        }
+
+        /* 轮播图 */
+        .carousel {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+        }
+
+        .carousel-slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s;
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+        }
+
+        .slide-content {
+            position: absolute;
+            left: 10%;
+            top: 30%;
+            color: white;
+        }
+
+        /* 快捷入口区 */
+        .quick-access {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            padding: 2rem 5%;
+        }
+
+        .favorite-sites {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+        }
+
+        /* 卡片系统 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            padding: 2rem 5%;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* 游戏卡片特殊样式 */
+        .game-card .thumbnail {
+            height: 200px;
+            background-size: cover;
+            position: relative;
+        }
+
+        .game-rating {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            background: rgba(0,0,0,0.7);
+            color: #FFD700;
+            padding: 0.3rem 0.7rem;
+            border-radius: 20px;
+        }
+
+        /* 侧边工具条 */
+        .sidebar-tools {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: white;
+            padding: 1rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .quick-access {
+                grid-template-columns: 1fr;
+            }
+
+            .carousel {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <nav class="navbar">
+        <div class="logo">NaviGame</div>
+        <div class="nav-menu">
+            <div class="nav-item">导航服务</div>
+            <div class="nav-item">小游戏</div>
+            <div class="nav-item">工具</div>
+        </div>
+        <input type="text" class="search-box" placeholder="搜索网站或游戏...">
+        <button class="login-btn">登录</button>
+    </nav>
+
+    <!-- 轮播图 -->
+    <div class="carousel">
+        <div class="carousel-slide active" style="background: linear-gradient(90deg, #4A90E2 0%, #6B48E8 100%)">
+            <div class="slide-content">
+                <h2>学习资源大全</h2>
+                <button>立即探索</button>
+            </div>
+        </div>
+        <div class="carousel-slide" style="background: linear-gradient(90deg, #FF6B6B 0%, #FFA36B 100%)">
+            <div class="slide-content">
+                <h2>今日热门游戏</h2>
+                <button>马上开玩</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 快捷入口区 -->
+    <div class="quick-access">
+        <div class="favorite-sites">
+            <h3>常用网站</h3>
+            <div class="card-grid">
+                <!-- 导航卡片 -->
+                <div class="card">
+                    <div class="content">
+                        <img src="wiki-icon.png" alt="Wikipedia">
+                        <h4>维基百科</h4>
+                        <p>免费百科全书</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="random-game">
+            <h3>随机推荐游戏</h3>
+            <!-- 游戏卡片 -->
+            <div class="card game-card">
+                <div class="thumbnail" style="background-image: url('2048-thumb.jpg')">
+                    <span class="game-rating">★4.2</span>
+                </div>
+                <div class="content">
+                    <h4>极速2048</h4>
+                    <button class="play-btn">开始游戏</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 侧边工具条 -->
+    <div class="sidebar-tools">
+        <div class="weather">☀️ 28℃</div>
+        <button class="dark-mode">🌓 主题</button>
+    </div>
+
+    <script>
+        // 轮播图逻辑
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+        setInterval(nextSlide, 5000);
+
+        // 动态生成导航卡片
+        const sites = [
+            { name: 'GitHub', icon: 'github.png', url: 'https://github.com' },
+            // 添加更多网站数据...
+        ];
+
+        function createSiteCard(site) {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <img src="${site.icon}" alt="${site.name}">
+                <h4>${site.name}</h4>
+                <a href="${site.url}" target="_blank">访问</a>
+            `;
+            return card;
+        }
+
+        // 主题切换
+        document.querySelector('.dark-mode').addEventListener('click', () => {
+            document.body.classList.toggle('dark-theme');
+        });
+    </script>
+</body>
+</html>
